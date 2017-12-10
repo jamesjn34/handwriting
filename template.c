@@ -1,31 +1,41 @@
 /*File: template.c		*/
 /*Author: James Nelson		*/
 
+#include <stdio.h>
+#include "fileIO.h"
+#include <string.h>
+#include "template.h"
+#include <stdlib.h>
+#include <assert.h>
 
-static void createTemplate (GtkWidget *wid, GtkWidget *inputButton)
+void createTemplate (char *in/*GtkWidget *wid, GtkWidget *inputButton*/)
 {
-    char *input = gtk_entry_get_text(inputButton);
-    printf("%s",input);
+    assert(in);
+    //char input[SLEN] = in;//gtk_entry_get_text(inputButton);
+    //printf("%s",input);
 
-    int length = strlen(input);
+    int length = strlen(in);
 
 
     double values[100000]={0};//stores all values, only needs one letter at a time
     double *p;
-    p = &values; //*(p+i) to access variables
+    p = &values[0]; //*(p+i) to access variables
 
     char * newName;
-    newName = strcat(input,".stl");
-
+    //newName = strcat(input,".stl");
+    newName = "John.stl";
     FILE *newFileptr = fopen(newName, "w");
     if(newFileptr==NULL)
         exit(1);
     for(int x = 0; x < length; x++)
     {
-        retrieve(input[x], p, x, newFileptr,length);
+        retrieve(in[x], p, x, newFileptr,length);
         for(int c = 0; c<100000; c++)
             *(p+c) = 0;
     }
+    #ifdef DEBUG
+ 	printf("Template Created and Saved ......\n");
+    #endif
 }
 
 

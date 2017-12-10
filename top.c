@@ -1,9 +1,14 @@
 /*File: Top.c		*/
 /*Author: James Nelson	*/
 
-int main (int argc, char *argv[])
+#include <stdio.h>
+#include <stdlib.h>
+#include "template.h"
+#include <string.h>
+
+int main ()
 {
-  GtkWidget *button = NULL;
+  /*GtkWidget *button = NULL;
   GtkWidget *calculateButton = NULL;
   GtkWidget *win = NULL;
   GtkWidget *vbox = NULL;
@@ -11,7 +16,7 @@ int main (int argc, char *argv[])
   GtkWidget *fixed = NULL;
   GtkWidget *comboBox = NULL;
 
-  /* Initialize GTK+ */
+
   g_log_set_handler ("Gtk", G_LOG_LEVEL_WARNING, (GLogFunc) gtk_false, NULL);
   gtk_init (&argc, &argv);
   g_log_set_handler ("Gtk", G_LOG_LEVEL_WARNING, g_log_default_handler, NULL);
@@ -48,17 +53,21 @@ int main (int argc, char *argv[])
 
   g_signal_connect (G_OBJECT (comboBox), "changed", G_CALLBACK (setStyle), comboBox);
   gtk_widget_show_all (win);
-  gtk_main ();
+  gtk_main ();*/
+  #ifdef DEBUG
+	printf("Creating Template.....\n");
+  #endif
+  createTemplate("John");
   return 0;
 }
 
-
+/*
 static void setStyle(GtkWidget *wid,GtkWidget *comboBox)//get style when change comboBox
 {
   style = gtk_combo_box_get_active(comboBox);
 }
 
-
+*/
 
 
 /*EOF*/

@@ -1,13 +1,23 @@
 /*File: fileIO.c        */
 /*Author: James Nelson  */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <ctype.h>
+#include "fileIO.h"
+
 void retrieve(char letter, double *p, int position, FILE *newFileptr, int length)
 {
+
     //save values into array
     //position =1;  test for calculation (set position != 0)
     char filename[7];
     char line[20];
     int counter=0;
     double num;
+    //temp
+    int style = 0;
     if(isspace(letter))//set the file to space
     {
         filename[0] = 's';
@@ -55,7 +65,10 @@ void retrieve(char letter, double *p, int position, FILE *newFileptr, int length
             else
                 filename[1] = 'c';//lowercase cursive
         }
-    }
+    }     
+     #ifdef DEBUG
+	printf("Retrieving Values from %s.......\n",filename);
+     #endif
     FILE* ptr = fopen(filename, "r");
     if(ptr == NULL)//Catch for not having txt file
     {
@@ -77,7 +90,7 @@ while(fgets(line,20,ptr) != NULL)
             else
                 *(p + counter) = num;
 
-            printf("%e   %e   %d   %d\n",num,*(p + counter),counter,position);
+            //printf("%e   %e   %d   %d\n",num,*(p + counter),counter,position);
             counter++;
       }
     fclose(ptr);
@@ -87,6 +100,9 @@ while(fgets(line,20,ptr) != NULL)
 
 void save(double *p, int postion, FILE *newFileptr, int counter,int length)
 {
+    #ifdef DEBUG
+	printf("Starting Save to file .......\n");
+    #endif
     if(postion == 0)//add beginning "solid 'filename'";
         fprintf(newFileptr,"solid newsolid\n");
     int i = 0;
